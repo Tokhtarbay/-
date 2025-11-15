@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жасыл Ел - Эко-карта</title>
+    <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+</head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #90EE90;
+            --dark-green: #1A5D38;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+            --yellow: #FFD700;
+            --blue: #1E90FF;
+            --orange: #FFA500;
+            --red: #FF4500;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header стильдері */
+        header {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-green);
+        }
+
+        /* Негізгі контент */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--light-green), var(--primary-green));
+            border-radius: 20px;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Карта секциясы */
+        .map-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            color: var(--dark-green);
+            border-bottom: 3px solid var(--light-green);
+            padding-bottom: 1rem;
+        }
+
+        .section-header i {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+        }
+
+        /* Карта контейнері */
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            height: 600px;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .map-controls {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        /* Фильтрлер */
+        .filter-section {
+            margin-bottom: 2rem;
+        }
+
+        .filter-section h3 {
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-section h3 i {
+            margin-right: 10px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--primary-green);
+            background: var(--white);
+            color: var(--primary-green);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .filter-btn:hover {
+            background: var(--light-green);
+            color: var(--dark-green);
+        }
+
+        /* Поиск */
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        /* Нүктелер тізімі */
+        .locations-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .location-item {
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .location-item:hover {
+            border-color: var(--primary-green);
+            background: #f8fff8;
+        }
+
+        .location-item.active {
+            border-color: var(--primary-green);
+            background: #f0fff0;
+        }
+
+        .location-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-name {
+            font-weight: bold;
+            color: var(--dark-green);
+        }
+
+        .location-type {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .type-recycle { background: #E1F5FE; color: #01579B; }
+        .type-charging { background: #E8F5E9; color: #1B5E20; }
+        .type-park { background: #F1F8E9; color: #33691E; }
+        .type-eco { background: #FFF8E1; color: #FF6F00; }
+
+        .location-distance {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .btn-direction {
+            background: var(--blue);
+            color: white;
+        }
+
+        .btn-details {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* Карта элементтері */
+        .map-legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .map-marker {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .marker-recycle { background: #2196F3; }
+        .marker-charging { background: #4CAF50; }
+        .marker-park { background: #8BC34A; }
+        .marker-eco { background: #FF9800; }
+
+        .marker-info {
+            position: absolute;
+            bottom: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            min-width: 200px;
+            display: none;
+        }
+
+        .marker-info::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: white;
+        }
+
+        /* Статистика */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--blue);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--dark-green);
+            margin: 0.5rem 0;
+        }
+
+        /* Қалалар тізімі */
+        .cities-section {
+            margin-top: 2rem;
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .city-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .city-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-green);
+        }
+
+        .city-card.active {
+            border-color: var(--primary-green);
+            background: #f8fff8;
+        }
+
+        .city-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .city-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+        }
+
+        .city-stat {
+            text-align: center;
+        }
+
+        .city-stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .city-stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Футер */
+        footer {
+            background: linear-gradient(135deg, var(--dark-green), #144329);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links i {
+            font-size: 1.5rem;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .social-links i:hover {
+            color: var(--light-green);
+        }
+
+        /* Адаптивтік */
+        @media (max-width: 968px) {
+            .map-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .map-controls {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid,
+            .cities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Жасыл Ел
+            </div>
+            <ul class="nav-links">
+                <li><a href="a.html"><i class="fas fa-home"></i> Басты бет</a></li>
+                <li><a href="b.html"><i class="fas fa-recycle"></i> Эко-өмір</a></li>
+                <li><a href="c.html"><i class="fas fa-car"></i> Эко-көлік</a></li>
+                <li><a href="d.html"><i class="fas fa-calculator"></i> Есептегіштер</a></li>
+                <li><a href="e.html" style="color: var(--light-green);"><i class="fas fa-map-marked-alt"></i> Карта</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Негізгі контент -->
+    <div class="main-container">
+        <!-- Бет тақырыбы -->
+        <section class="page-header">
+            <h1><i class="fas fa-map-marked-alt"></i> Эко-карта</h1>
+            <p>Қазақстандағы экологиялық нүктелерді табыңыз</p>
+        </section>
+
+        <!-- Негізгі карта -->
+        <section class="map-section">
+            <div class="section-header">
+                <i class="fas fa-map"></i>
+                <h2>Эко-нүктелер картасы</h2>
+            </div>
+            
+            <div class="map-container">
+                <div id="map">
+                    <!-- Карта легендасы -->
+                    <div class="map-legend">
+                        <h4 style="margin-bottom: 1rem; color: var(--dark-green);">Аңғартпалар:</h4>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #2196F3;"></div>
+                            <span>Қайта өңдеу нүктелері</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #4CAF50;"></div>
+                            <span>Зарядтау станциялары</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #8BC34A;"></div>
+                            <span>Эко-саябақтар</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #FF9800;"></div>
+                            <span>Эко-дүкендер</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Карта маркерлері -->
+                    <div class="map-marker marker-recycle" style="top: 40%; left: 45%;" data-id="1">
+                        <i class="fas fa-recycle"></i>
+                        <div class="marker-info">
+                            <strong>Қайта өңдеу орталығы</strong><br>
+                            Астана, Достық көшесі 12<br>
+                            ️🕒 09:00-18:00
+                        </div>
+                    </div>
+                    
+                    <div class="map-marker marker-charging" style="top: 42%; left: 47%;" data-id="2">
+                        <i class="fas fa-charging-station"></i>
+                        <div class="marker-info">
+                            <strong>Электромобиль зарядтау</strong><br>
+                            Астана, Нұрсұлтан Назарбаев көшесі 25<br>
+                            ⚡ Тегін 2 сағат
+                        </div>
+                    </div>
+                    
+                    <div class="map-marker marker-park" style="top: 38%; left: 43%;" data-id="3">
+                        <i class="fas fa-tree"></i>
+                        <div class="marker-info">
+                            <strong>Эко-саябақ</strong><br>
+                            Астана, Аққорған паркі<br>
+                            🌳 50 га жасыл алаң
+                        </div>
+                    </div>
+                    
+                    <div class="map-marker marker-eco" style="top: 44%; left: 46%;" data-id="4">
+                        <i class="fas fa-store"></i>
+                        <div class="marker-info">
+                            <strong>Эко-дүкен</strong><br>
+                            Астана, Кенесары көшесі 18<br>
+                            🌱 Табиғи өнімдер
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-controls">
+                    <!-- Поиск -->
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Қаланы немесе нүктені іздеу...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    
+                    <!-- Фильтрлер -->
+                    <div class="filter-section">
+                        <h3><i class="fas fa-filter"></i> Фильтрлер</h3>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-type="all">Барлығы</button>
+                            <button class="filter-btn" data-type="recycle">Қайта өңдеу</button>
+                            <button class="filter-btn" data-type="charging">Зарядтау</button>
+                            <button class="filter-btn" data-type="park">Саябақтар</button>
+                            <button class="filter-btn" data-type="eco">Эко-дүкендер</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Нүктелер тізімі -->
+                    <div class="locations-list" id="locationsList">
+                        <!-- Нүктелер осында толтырылады -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Статистика -->
+        <section class="map-section">
+            <div class="section-header">
+                <i class="fas fa-chart-bar"></i>
+                <h2>Карта статистикасы</h2>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-recycle"></i>
+                    <h4>Қайта өңдеу нүктелері</h4>
+                    <div class="stat-value" id="recycleCount">127</div>
+                    <p>Қазақстан бойынша</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-charging-station"></i>
+                    <h4>Зарядтау станциялары</h4>
+                    <div class="stat-value" id="chargingCount">58</div>
+                    <p>Электромобильдер үшін</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-tree"></i>
+                    <h4>Эко-саябақтар</h4>
+                    <div class="stat-value" id="parkCount">43</div>
+                    <p>Қорғалатын аймақтар</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-store"></i>
+                    <h4>Эко-дүкендер</h4>
+                    <div class="stat-value" id="storeCount">89</div>
+                    <p>Табиғи өнімдер</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Қалалар бойынша нүктелер -->
+        <section class="map-section">
+            <div class="section-header">
+                <i class="fas fa-city"></i>
+                <h2>Қалалар бойынша</h2>
+            </div>
+            
+            <div class="cities-grid">
+                <div class="city-card active" data-city="astana">
+                    <div class="city-name">Астана</div>
+                    <p>Қазақстан астанасы</p>
+                    <div class="city-stats">
+                        <div class="city-stat">
+                            <div class="city-stat-value">45</div>
+                            <div class="city-stat-label">Нүктелер</div>
+                        </div>
+                        <div class="city-stat">
+                            <div class="city-stat-value">12</div>
+                            <div class="city-stat-label">Зарядтау</div>
+                        </div>
+                        <div class="city-stat">
+                            <div class="city-stat-value">8</div>
+                            <div class="city-stat-label">Саябақтар</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="city-card" data-city="almaty">
+                    <div class="city-name">Алматы</div>
+                    <p>Оңтүстік астанасы</p>
+                    <div class="city-stats">
+                        <div class="city-stat">
+                            <div class="city-stat-value">67</div>
+                            <div class="city-stat-label">Нүктелер</div>
+                        </div>
+                        <div class="city-stat">
+                            <div class="city-stat-value">25</div>
+                            <div class="city-stat-label">Зарядтау</div>
+                        </div>
+                        <div class="city-stat">
+                            <div class="city-stat-value">15</div>
+                            <div class="city-stat-label">Саябақтар</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="city-card" data-city="shymkent">
+                    <div class="city-name">Шымкент</div>
+                    <p>Оңтүстік қаласы</p>
+                    <div class="city-stats">
+                        <div class="city-stat">
+                            <div class="city-stat-value">23</div>
+                            <div class="city-stat-label">Нүктелер</div>
+                        </div>
+                        <div class="city-stat">
+                            <div class="city-stat-value">8</div>
+                            <div class="city-stat-label">Зарядтау</div>
+                        </div>
+                        <div class="city-stat">
+                            <div class="city-stat-value">5</div>
+                            <div class="city-stat-label">Саябақтар</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="city-card" data-city="karaganda">
+                    <div class="city-name">Қарағанды</div>
+                    <p>Орталық Қазақстан</p>
+                    <div class="city-stats">
+                        <div class="city-stat">
+                            <div class="city-stat-value">18</div>
+                            <div class="city-stat-label">Нүктелер</div>
+                        </div>
+                        <div class="city-stat">
+                            <div class="city-stat-value">6</div>
+                            <div class="city-stat-label">Зарядтау</div>
+                        </div>
+                        <div class="city-stat">
+                            <div class="city-stat-value">4</div>
+                            <div class="city-stat-label">Саябақтар</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Қосымша ақпарат -->
+        <section class="map-section">
+            <div class="section-header">
+                <i class="fas fa-info-circle"></i>
+                <h2>Карта бойынша ақпарат</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3 style="color: var(--dark-green); margin-bottom: 1rem;">Картаны қалай пайдалануға болады?</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                            <i class="fas fa-search" style="color: var(--primary-green); margin-right: 10px;"></i>
+                            <span>Қала атын немесе нүкте түрін енгізіп іздеңіз</span>
+                        </li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                            <i class="fas fa-filter" style="color: var(--primary-green); margin-right: 10px;"></i>
+                            <span>Фильтрлерді пайдаланып, қажетті нүктелерді таңдаңыз</span>
+                        </li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--primary-green); margin-right: 10px;"></i>
+                            <span>Картадағы маркерлерді басып, ақпаратты көріңіз</span>
+                        </li>
+                        <li style="padding: 8px 0; display: flex; align-items: center;">
+                            <i class="fas fa-route" style="color: var(--primary-green); margin-right: 10px;"></i>
+                            <span>Бағыттау үшін "Жолды көрсету" түймесін басыңыз</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--dark-green); margin-bottom: 1rem;">Жақын арадағы жаңартулар</h3>
+                    <div style="background: #f8fff8; padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--primary-green);">
+                        <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Жаңа нүктелер қосылуда</h4>
+                        <p style="margin-bottom: 1rem;">Ақтау, Атырау және Ақтөбе қалаларында жаңа қайта өңдеу орталықтары ашылады.</p>
+                        
+                        <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Карта функциялары кеңейтіледі</h4>
+                        <p>Жақын арада нақты GPS координаттар және навигация функциясы қосылады.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <p>"Жасыл Ел" - Қазақстандық экологиялық қозғалыс</p>
+            <p>© 2025 </p>
+            <div class="social-links">
+                <i class="fas fa-envelope"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-telegram"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Нүктелер деректері
+        const locationsData = [
+            {
+                id: 1,
+                name: "Қайта өңдеу орталығы",
+                type: "recycle",
+                address: "Астана, Достық көшесі 12",
+                hours: "09:00-18:00",
+                phone: "+7 7172 123 456",
+                distance: "2.3 км",
+                coordinates: { top: "40%", left: "45%" }
+            },
+            {
+                id: 2,
+                name: "Электромобиль зарядтау",
+                type: "charging",
+                address: "Астана, Нұрсұлтан Назарбаев көшесі 25",
+                hours: "24/7",
+                phone: "+7 7172 234 567",
+                distance: "3.1 км",
+                coordinates: { top: "42%", left: "47%" }
+            },
+            {
+                id: 3,
+                name: "Эко-саябақ",
+                type: "park",
+                address: "Астана, Аққорған паркі",
+                hours: "06:00-23:00",
+                phone: "+7 7172 345 678",
+                distance: "1.8 км",
+                coordinates: { top: "38%", left: "43%" }
+            },
+            {
+                id: 4,
+                name: "Эко-дүкен",
+                type: "eco",
+                address: "Астана, Кенесары көшесі 18",
+                hours: "10:00-20:00",
+                phone: "+7 7172 456 789",
+                distance: "4.2 км",
+                coordinates: { top: "44%", left: "46%" }
+            },
+            {
+                id: 5,
+                name: "Пластик қайта өңдеу",
+                type: "recycle",
+                address: "Алматы, Абай даңғылы 45",
+                hours: "08:00-19:00",
+                phone: "+7 727 123 456",
+                distance: "5.7 км",
+                coordinates: { top: "35%", left: "40%" }
+            },
+            {
+                id: 6,
+                name: "Тесла зарядтау станциясы",
+                type: "charging",
+                address: "Алматы, Фурманов көшесі 123",
+                hours: "24/7",
+                phone: "+7 727 234 567",
+                distance: "6.2 км",
+                coordinates: { top: "37%", left: "42%" }
+            }
+        ];
+
+        // Картаны инициализациялау
+        document.addEventListener('DOMContentLoaded', function() {
+            // Нүктелер тізімін толтыру
+            renderLocationsList(locationsData);
+            
+            // Фильтр түймелеріне оқиға қосу
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Барлық түймелерден актив класын алып тастау
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    // Ағымдағы түймеге актив класын қосу
+                    this.classList.add('active');
+                    
+                    const filterType = this.getAttribute('data-type');
+                    filterLocations(filterType);
+                });
+            });
+            
+            // Карта маркерлеріне оқиға қосу
+            const markers = document.querySelectorAll('.map-marker');
+            markers.forEach(marker => {
+                marker.addEventListener('click', function() {
+                    const markerId = this.getAttribute('data-id');
+                    showMarkerInfo(markerId);
+                });
+                
+                marker.addEventListener('mouseenter', function() {
+                    const info = this.querySelector('.marker-info');
+                    info.style.display = 'block';
+                });
+                
+                marker.addEventListener('mouseleave', function() {
+                    const info = this.querySelector('.marker-info');
+                    info.style.display = 'none';
+                });
+            });
+            
+            // Қала карточкаларына оқиға қосу
+            const cityCards = document.querySelectorAll('.city-card');
+            cityCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Барлық карточкалардан актив класын алып тастау
+                    cityCards.forEach(c => c.classList.remove('active'));
+                    // Ағымдағы карточкаға актив класын қосу
+                    this.classList.add('active');
+                    
+                    const city = this.getAttribute('data-city');
+                    filterByCity(city);
+                });
+            });
+            
+            // Поиск функциясы
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                searchLocations(this.value);
+            });
+            
+            // Статистиканы жаңарту
+            updateStatistics();
+        });
+        
+        // Нүктелер тізімін көрсету
+        function renderLocationsList(locations) {
+            const locationsList = document.getElementById('locationsList');
+            locationsList.innerHTML = '';
+            
+            locations.forEach(location => {
+                const locationItem = document.createElement('div');
+                locationItem.className = 'location-item';
+                locationItem.setAttribute('data-id', location.id);
+                locationItem.setAttribute('data-type', location.type);
+                
+                let typeClass = '';
+                let typeText = '';
+                
+                switch(location.type) {
+                    case 'recycle':
+                        typeClass = 'type-recycle';
+                        typeText = 'Қайта өңдеу';
+                        break;
+                    case 'charging':
+                        typeClass = 'type-charging';
+                        typeText = 'Зарядтау';
+                        break;
+                    case 'park':
+                        typeClass = 'type-park';
+                        typeText = 'Саябақ';
+                        break;
+                    case 'eco':
+                        typeClass = 'type-eco';
+                        typeText = 'Эко-дүкен';
+                        break;
+                }
+                
+                locationItem.innerHTML = `
+                    <div class="location-header">
+                        <div class="location-name">${location.name}</div>
+                        <div class="location-type ${typeClass}">${typeText}</div>
+                    </div>
+                    <div class="location-distance">${location.distance}</div>
+                    <div class="location-address">${location.address}</div>
+                    <div class="location-hours">🕒 ${location.hours}</div>
+                    <div class="location-actions">
+                        <button class="action-btn btn-direction" onclick="showDirections(${location.id})">
+                            <i class="fas fa-route"></i> Жолды көрсету
+                        </button>
+                        <button class="action-btn btn-details" onclick="showLocationDetails(${location.id})">
+                            <i class="fas fa-info-circle"></i> Толығырақ
+                        </button>
+                    </div>
+                `;
+                
+                // Нүктеге басқанда маркерді бөлектеу
+                locationItem.addEventListener('click', function() {
+                    highlightLocation(location.id);
+                });
+                
+                locationsList.appendChild(locationItem);
+            });
+        }
+        
+        // Нүктелерді фильтрлеу
+        function filterLocations(type) {
+            if (type === 'all') {
+                renderLocationsList(locationsData);
+                showAllMarkers();
+            } else {
+                const filteredLocations = locationsData.filter(location => location.type === type);
+                renderLocationsList(filterLocations);
+                showMarkersByType(type);
+            }
+        }
+        
+        // Қала бойынша фильтрлеу
+        function filterByCity(city) {
+            // Бұл жерде қала бойынша нақты фильтрлеу болуы керек
+            // Қазіргі уақытта барлық нүктелерді көрсетеміз
+            renderLocationsList(locationsData);
+            showAllMarkers();
+            
+            // Қала атауын көрсету
+            alert(city + " қаласының эко-нүктелері көрсетілуде");
+        }
+        
+        // Нүктелерді іздеу
+        function searchLocations(query) {
+            if (query.trim() === '') {
+                renderLocationsList(locationsData);
+                showAllMarkers();
+                return;
+            }
+            
+            const searchResults = locationsData.filter(location => 
+                location.name.toLowerCase().includes(query.toLowerCase()) ||
+                location.address.toLowerCase().includes(query.toLowerCase()) ||
+                location.type.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            renderLocationsList(searchResults);
+            showMarkersBySearch(searchResults);
+        }
+        
+        // Маркерлерді көрсету/жасыру функциялары
+        function showAllMarkers() {
+            const markers = document.querySelectorAll('.map-marker');
+            markers.forEach(marker => {
+                marker.style.display = 'block';
+            });
+        }
+        
+        function showMarkersByType(type) {
+            const markers = document.querySelectorAll('.map-marker');
+            markers.forEach(marker => {
+                if (marker.classList.contains(`marker-${type}`)) {
+                    marker.style.display = 'block';
+                } else {
+                    marker.style.display = 'none';
+                }
+            });
+        }
+        
+        function showMarkersBySearch(locations) {
+            const markers = document.querySelectorAll('.map-marker');
+            const visibleIds = locations.map(l => l.id);
+            
+            markers.forEach(marker => {
+                const markerId = parseInt(marker.getAttribute('data-id'));
+                if (visibleIds.includes(markerId)) {
+                    marker.style.display = 'block';
+                } else {
+                    marker.style.display = 'none';
+                }
+            });
+        }
+        
+        // Маркер ақпаратын көрсету
+        function showMarkerInfo(markerId) {
+            const location = locationsData.find(l => l.id == markerId);
+            if (location) {
+                alert(`${location.name}\n\nАдрес: ${location.address}\nЖұмыс уақыты: ${location.hours}\nТелефон: ${location.phone}`);
+            }
+        }
+        
+        // Нүктені бөлектеу
+        function highlightLocation(locationId) {
+            // Барлық нүктелерден актив класын алып тастау
+            const locationItems = document.querySelectorAll('.location-item');
+            locationItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Ағымдағы нүктеге актив класын қосу
+            const currentItem = document.querySelector(`.location-item[data-id="${locationId}"]`);
+            if (currentItem) {
+                currentItem.classList.add('active');
+            }
+            
+            // Маркерді бөлектеу
+            const markers = document.querySelectorAll('.map-marker');
+            markers.forEach(marker => {
+                marker.style.transform = 'rotate(-45deg)';
+                marker.style.zIndex = '1';
+            });
+            
+            const currentMarker = document.querySelector(`.map-marker[data-id="${locationId}"]`);
+            if (currentMarker) {
+                currentMarker.style.transform = 'rotate(-45deg) scale(1.2)';
+                currentMarker.style.zIndex = '2';
+            }
+        }
+        
+        // Бағыттау көрсету
+        function showDirections(locationId) {
+            const location = locationsData.find(l => l.id == locationId);
+            if (location) {
+                alert(`"${location.name}" бағыты көрсетілуде...\n\nНавигация жүйесіне бағыт жіберілді.`);
+            }
+        }
+        
+        // Нүкте туралы толық ақпарат
+        function showLocationDetails(locationId) {
+            const location = locationsData.find(l => l.id == locationId);
+            if (location) {
+                const modalHtml = `
+                    <div style="padding: 2rem; max-width: 500px; background: white; border-radius: 15px; text-align: center;">
+                        <h2 style="color: var(--primary-green); margin-bottom: 1rem;">${location.name}</h2>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>Адрес:</strong> ${location.address}
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>Жұмыс уақыты:</strong> ${location.hours}
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>Телефон:</strong> ${location.phone}
+                        </div>
+                        <div style="margin-bottom: 2rem;">
+                            <strong>Қашықтық:</strong> ${location.distance}
+                        </div>
+                        <button onclick="closeModal()" style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            Жабу
+                        </button>
+                    </div>
+                `;
+                
+                // Модальды терезені көрсету
+                showModal(modalHtml);
+            }
+        }
+        
+        // Модальды терезені көрсету
+        function showModal(content) {
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '10000';
+            modal.innerHTML = content;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Модальды терезені жабу
+        function closeModal() {
+            const modal = document.querySelector('body > div:last-child');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        // Статистиканы жаңарту
+        function updateStatistics() {
+            const recycleCount = locationsData.filter(l => l.type === 'recycle').length;
+            const chargingCount = locationsData.filter(l => l.type === 'charging').length;
+            const parkCount = locationsData.filter(l => l.type === 'park').length;
+            const storeCount = locationsData.filter(l => l.type === 'eco').length;
+            
+            document.getElementById('recycleCount').textContent = recycleCount * 10; // Көбейтеміз көрнекілік үшін
+            document.getElementById('chargingCount').textContent = chargingCount * 10;
+            document.getElementById('parkCount').textContent = parkCount * 10;
+            document.getElementById('storeCount').textContent = storeCount * 10;
+        }
+    </script>
+</body>
+</html>

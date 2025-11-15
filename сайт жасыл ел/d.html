@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жасыл Ел - Эко-есептегіштер</title>
+    <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+</head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #90EE90;
+            --dark-green: #1A5D38;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+            --yellow: #FFD700;
+            --blue: #1E90FF;
+            --orange: #FFA500;
+            --red: #FF4500;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header стильдері */
+        header {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-green);
+        }
+
+        /* Негізгі контент */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--light-green), var(--primary-green));
+            border-radius: 20px;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Калькуляторлар секциясы */
+        .calculators-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            color: var(--dark-green);
+            border-bottom: 3px solid var(--light-green);
+            padding-bottom: 1rem;
+        }
+
+        .section-header i {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+        }
+
+        /* Калькулятор карточкалары */
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .calculator-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray) 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-green);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-green), var(--light-green));
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .calculator-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+
+        .calculator-card h3 i {
+            margin-right: 12px;
+            font-size: 1.6rem;
+        }
+
+        /* Форма элементтері */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-green);
+        }
+
+        .btn-secondary {
+            background: var(--blue);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #1a7ae0;
+        }
+
+        /* Нәтижелер бөлімі */
+        .results-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fff8;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-green);
+            display: none;
+        }
+
+        .results-section h4 {
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .results-section h4 i {
+            margin-right: 10px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e8f5e9;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-value {
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        /* Прогресс бар */
+        .progress-container {
+            margin: 1.5rem 0;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-green), var(--light-green));
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Статистика карточкалары */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--blue);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--dark-green);
+            margin: 0.5rem 0;
+        }
+
+        /* Кеңестер бөлімі */
+        .tips-section {
+            background: #fff9e6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--yellow);
+        }
+
+        .tips-section h4 {
+            color: #b8860b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tips-section h4 i {
+            margin-right: 10px;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #fff0c2;
+            display: flex;
+            align-items: center;
+        }
+
+        .tips-list li:before {
+            content: '💡';
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Футер */
+        footer {
+            background: linear-gradient(135deg, var(--dark-green), #144329);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links i {
+            font-size: 1.5rem;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .social-links i:hover {
+            color: var(--light-green);
+        }
+
+        /* Адаптивтік */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .calculators-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Жасыл Ел
+            </div>
+            <ul class="nav-links">
+                <li><a href="a.html"><i class="fas fa-home"></i> Басты бет</a></li>
+                <li><a href="b.html"><i class="fas fa-recycle"></i> Эко-өмір</a></li>
+                <li><a href="c.html"><i class="fas fa-car"></i> Эко-көлік</a></li>
+                <li><a href="calculators.html" style="color: var(--light-green);"><i class="fas fa-calculator"></i> Есептегіштер</a></li>
+                <li><a href="e.html"><i class="fas fa-map-marked-alt"></i> Карта</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Негізгі контент -->
+    <div class="main-container">
+        <!-- Бет тақырыбы -->
+        <section class="page-header">
+            <h1><i class="fas fa-calculator"></i> Эко-есептегіштер</h1>
+            <p>Сіздің экологиялық ізіңізді есептеп, үнемдеу жолдарын табыңыз</p>
+        </section>
+
+        <!-- Көмірқышқыл газы есептегіші -->
+        <section class="calculators-section">
+            <div class="section-header">
+                <i class="fas fa-industry"></i>
+                <h2>Көмірқышқыл газы есептегіші</h2>
+            </div>
+            
+            <div class="calculators-grid">
+                <div class="calculator-card">
+                    <h3>
+                        <i class="fas fa-car"></i>
+                        Көлік шығарындысы
+                    </h3>
+                    <p>Күнделікті жүру-көлік шығарындысыңызды есептеңіз</p>
+                    
+                    <div class="form-group">
+                        <label for="carType">Көлік түрі:</label>
+                        <select id="carType" class="form-control">
+                            <option value="0.12">Жеңіл автомобиль (бензин)</option>
+                            <option value="0.15">Жеңіл автомобиль (дизель)</option>
+                            <option value="0.08">Гибридті автомобиль</option>
+                            <option value="0">Электромобиль</option>
+                            <option value="0.05">Мотоцикл</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dailyDistance">Күнделікті жүру қашықтығы (км):</label>
+                        <input type="number" id="dailyDistance" class="form-control" min="0" value="20">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="workDays">Жұмыс күндері (айына):</label>
+                        <input type="number" id="workDays" class="form-control" min="0" max="31" value="22">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="calculateTransportEmission()">
+                        <i class="fas fa-calculator"></i> Есептеу
+                    </button>
+                    
+                    <div id="transportResults" class="results-section">
+                        <h4><i class="fas fa-chart-line"></i> Нәтижелер</h4>
+                        <div class="result-item">
+                            <span>Айлық CO₂ шығарындысы:</span>
+                            <span id="monthlyEmission" class="result-value">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Жылдық CO₂ шығарындысы:</span>
+                            <span id="yearlyEmission" class="result-value">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Эквивалентті ағаш саны:</span>
+                            <span id="equivalentTrees" class="result-value">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calculator-card">
+                    <h3>
+                        <i class="fas fa-home"></i>
+                        Үй шығарындысы
+                    </h3>
+                    <p>Тұрғын үйіңіздің энергия тұтынуы бойынша шығарындыны есептеңіз</p>
+                    
+                    <div class="form-group">
+                        <label for="electricityUsage">Айлық электр тұтынуы (кВт·сағ):</label>
+                        <input type="number" id="electricityUsage" class="form-control" min="0" value="300">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gasUsage">Айлық газ тұтынуы (м³):</label>
+                        <input type="number" id="gasUsage" class="form-control" min="0" value="100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="heatingType">Жылыту түрі:</label>
+                        <select id="heatingType" class="form-control">
+                            <option value="0.2">Табиғи газ</option>
+                            <option value="0.3">Электр</option>
+                            <option value="0.4">Мазут</option>
+                            <option value="0.1">Жылу насосы</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="calculateHomeEmission()">
+                        <i class="fas fa-calculator"></i> Есептеу
+                    </button>
+                    
+                    <div id="homeResults" class="results-section">
+                        <h4><i class="fas fa-chart-line"></i> Нәтижелер</h4>
+                        <div class="result-item">
+                            <span>Айлық CO₂ шығарындысы:</span>
+                            <span id="homeMonthlyEmission" class="result-value">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Жылдық CO₂ шығарындысы:</span>
+                            <span id="homeYearlyEmission" class="result-value">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Ұсынылған үнемдеу:</span>
+                            <span id="savingSuggestion" class="result-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Тұтыну есептегіштері -->
+        <section class="calculators-section">
+            <div class="section-header">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Тұтыну есептегіштері</h2>
+            </div>
+            
+            <div class="calculators-grid">
+                <div class="calculator-card">
+                    <h3>
+                        <i class="fas fa-utensils"></i>
+                        Азық-түлік эко-ізі
+                    </h3>
+                    <p>Азық-түлік тұтынуыңыздың экологиялық әсерін есептеңіз</p>
+                    
+                    <div class="form-group">
+                        <label for="meatConsumption">Ет тұтынуы (кг/апта):</label>
+                        <input type="number" id="meatConsumption" class="form-control" min="0" value="2">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dairyConsumption">Сүт өнімдері (кг/апта):</label>
+                        <input type="number" id="dairyConsumption" class="form-control" min="0" value="3">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="localFood">Жергілікті өнімдер пайызы:</label>
+                        <select id="localFood" class="form-control">
+                            <option value="1">0-20%</option>
+                            <option value="0.8">20-50%</option>
+                            <option value="0.6">50-80%</option>
+                            <option value="0.4">80-100%</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="calculateFoodFootprint()">
+                        <i class="fas fa-calculator"></i> Есептеу
+                    </button>
+                    
+                    <div id="foodResults" class="results-section">
+                        <h4><i class="fas fa-chart-line"></i> Нәтижелер</h4>
+                        <div class="result-item">
+                            <span>Айлық азық-түлік эко-ізі:</span>
+                            <span id="foodFootprint" class="result-value">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Жылдық CO₂ эквиваленті:</span>
+                            <span id="foodCO2" class="result-value">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Ұсыныс:</span>
+                            <span id="foodSuggestion" class="result-value">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calculator-card">
+                    <h3>
+                        <i class="fas fa-tint"></i>
+                        Су тұтынуы
+                    </h3>
+                    <p>Су тұтынуыңызды есептеп, үнемдеу мүмкіндіктерін табыңыз</p>
+                    
+                    <div class="form-group">
+                        <label for="showerTime">Душ қабылдау уақыты (мин/күн):</label>
+                        <input type="number" id="showerTime" class="form-control" min="0" value="10">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bathFrequency">Ванна қабылдау (рет/апта):</label>
+                        <input type="number" id="bathFrequency" class="form-control" min="0" value="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="laundryFrequency">Кір жуу (рет/апта):</label>
+                        <input type="number" id="laundryFrequency" class="form-control" min="0" value="3">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dishwashing">Ыдыс жуу түрі:</label>
+                        <select id="dishwashing" class="form-control">
+                            <option value="15">Қолмен (л/рет)</option>
+                            <option value="30">Ыдыс жуғыш (л/рет)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="calculateWaterUsage()">
+                        <i class="fas fa-calculator"></i> Есептеу
+                    </button>
+                    
+                    <div id="waterResults" class="results-section">
+                        <h4><i class="fas fa-chart-line"></i> Нәтижелер</h4>
+                        <div class="result-item">
+                            <span>Күнделікті су тұтынуы:</span>
+                            <span id="dailyWater" class="result-value">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Айлық су тұтынуы:</span>
+                            <span id="monthlyWater" class="result-value">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Ұсынылған үнемдеу:</span>
+                            <span id="waterSaving" class="result-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Үнемдеу статистикасы -->
+        <section class="calculators-section">
+            <div class="section-header">
+                <i class="fas fa-chart-bar"></i>
+                <h2>Үнемдеу статистикасы</h2>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-tree"></i>
+                    <h4>Ағаштарды құтқардыңыз</h4>
+                    <div class="stat-value" id="savedTrees">0</div>
+                    <p>CO₂ сіңіру арқылы</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h4>Ақша үнемдедіңіз</h4>
+                    <div class="stat-value" id="savedMoney">0 ₸</div>
+                    <p>Энергия үнемдеу арқылы</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-tint"></i>
+                    <h4>Су үнемдедіңіз</h4>
+                    <div class="stat-value" id="savedWater">0 л</div>
+                    <p>Тұтынуды азайту арқылы</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Энергия үнемдедіңіз</h4>
+                    <div class="stat-value" id="savedEnergy">0 кВт·сағ</div>
+                    <p>Тиімді тұтыну арқылы</p>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <h4 style="margin-bottom: 1rem;">Эко-дәрежеңіз:</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="ecoLevel" style="width: 30%"></div>
+                </div>
+                <div class="progress-labels">
+                    <span>Бастапқы</span>
+                    <span id="ecoPercentage">30%</span>
+                    <span>Эко-шебер</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Үнемдеу кеңестері -->
+        <section class="calculators-section">
+            <div class="section-header">
+                <i class="fas fa-lightbulb"></i>
+                <h2>Үнемдеу кеңестері</h2>
+            </div>
+            
+            <div class="tips-section">
+                <h4><i class="fas fa-bolt"></i> Энергия үнемдеу бойынша кеңестер</h4>
+                <ul class="tips-list">
+                    <li>Энергия үнемді шамдарды пайдаланыңыз</li>
+                    <li>Қажет болмағанда электр құрылғыларын өшіріңіз</li>
+                    <li>Термостатты бір градус төмендетіңіз</li>
+                    <li>Күн энергиясын пайдалануды қарастырыңыз</li>
+                </ul>
+            </div>
+            
+            <div class="tips-section">
+                <h4><i class="fas fa-tint"></i> Су үнемдеу бойынша кеңестер</h4>
+                <ul class="tips-list">
+                    <li>Душ қабылдау уақытын қысқартыңыз</li>
+                    <li>Су үнемді душ басқырын орнатыңыз</li>
+                    <li>Ыдыс жуғышты толық жүктегенде қолданыңыз</li>
+                    <li>Тазартылған жаңбыр суын пайдаланыңыз</li>
+                </ul>
+            </div>
+            
+            <div class="tips-section">
+                <h4><i class="fas fa-recycle"></i> Қалдықтарды азайту бойынша кеңестер</h4>
+                <ul class="tips-list">
+                    <li>Қалдықтарды дұрыс сұрыптаңыз</li>
+                    <li>Қайта пайдаланылатын сөмкелерді пайдаланыңыз</li>
+                    <li>Компосттау жүйесін құрыңыз</li>
+                    <li>Бір реттік пластиктен бас тартыңыз</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>"Жасыл Ел" - Қазақстандық экологиялық қозғалыс</p>
+            <p>© 2025 </p>
+            <div class="social-links">
+                <i class="fas fa-envelope"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-telegram"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Көлік шығарындысын есептеу
+        function calculateTransportEmission() {
+            const carType = parseFloat(document.getElementById('carType').value);
+            const dailyDistance = parseFloat(document.getElementById('dailyDistance').value);
+            const workDays = parseFloat(document.getElementById('workDays').value);
+            
+            const monthlyEmission = carType * dailyDistance * workDays;
+            const yearlyEmission = monthlyEmission * 12;
+            const equivalentTrees = Math.round(yearlyEmission / 21.77); // 1 ағаш жылына 21.77 кг CO₂ сіңіреді
+            
+            document.getElementById('monthlyEmission').textContent = monthlyEmission.toFixed(2) + ' кг CO₂';
+            document.getElementById('yearlyEmission').textContent = yearlyEmission.toFixed(2) + ' кг CO₂';
+            document.getElementById('equivalentTrees').textContent = equivalentTrees + ' ағаш';
+            
+            document.getElementById('transportResults').style.display = 'block';
+            
+            // Статистиканы жаңарту
+            updateStats('trees', equivalentTrees);
+            updateEcoLevel(10);
+        }
+        
+        // Үй шығарындысын есептеу
+        function calculateHomeEmission() {
+            const electricityUsage = parseFloat(document.getElementById('electricityUsage').value);
+            const gasUsage = parseFloat(document.getElementById('gasUsage').value);
+            const heatingType = parseFloat(document.getElementById('heatingType').value);
+            
+            // Электр шығарындысы (0.4 кг CO₂/кВт·сағ орташа)
+            const electricityEmission = electricityUsage * 0.4;
+            // Газ шығарындысы (2 кг CO₂/м³ орташа)
+            const gasEmission = gasUsage * 2;
+            // Жылыту шығарындысы
+            const heatingEmission = heatingType * electricityUsage;
+            
+            const monthlyEmission = electricityEmission + gasEmission + heatingEmission;
+            const yearlyEmission = monthlyEmission * 12;
+            
+            // Ұсыныс
+            let suggestion = "Энергия үнемді шамдарды пайдаланыңыз";
+            if (electricityUsage > 500) {
+                suggestion = "Электр тұтынуын азайтыңыз";
+            } else if (gasUsage > 150) {
+                suggestion = "Газ тұтынуын тексеріңіз";
+            }
+            
+            document.getElementById('homeMonthlyEmission').textContent = monthlyEmission.toFixed(2) + ' кг CO₂';
+            document.getElementById('homeYearlyEmission').textContent = yearlyEmission.toFixed(2) + ' кг CO₂';
+            document.getElementById('savingSuggestion').textContent = suggestion;
+            
+            document.getElementById('homeResults').style.display = 'block';
+            
+            // Статистиканы жаңарту
+            const savedMoney = Math.round(electricityUsage * 25); // 1 кВт·сағ = 25 ₸
+            updateStats('money', savedMoney);
+            updateEcoLevel(15);
+        }
+        
+        // Азық-түлік эко-ізін есептеу
+        function calculateFoodFootprint() {
+            const meatConsumption = parseFloat(document.getElementById('meatConsumption').value);
+            const dairyConsumption = parseFloat(document.getElementById('dairyConsumption').value);
+            const localFood = parseFloat(document.getElementById('localFood').value);
+            
+            // Ет эко-ізі (27 кг CO₂/кг орташа)
+            const meatFootprint = meatConsumption * 27 * 4; // апталықтан айлыққа
+            // Сүт өнімдері эко-ізі (3 кг CO₂/кг орташа)
+            const dairyFootprint = dairyConsumption * 3 * 4; // апталықтан айлыққа
+            
+            let monthlyFootprint = (meatFootprint + dairyFootprint) * localFood;
+            let yearlyCO2 = monthlyFootprint * 12;
+            
+            // Ұсыныс
+            let suggestion = "Жергілікті өнімдерді көбірек пайдаланыңыз";
+            if (meatConsumption > 3) {
+                suggestion = "Ет тұтынуын азайтып, өсімдік негізді тамақтандыруды қарастырыңыз";
+            } else if (dairyConsumption > 5) {
+                suggestion = "Сүт өнімдерін шектеңіз";
+            }
+            
+            document.getElementById('foodFootprint').textContent = monthlyFootprint.toFixed(2) + ' кг CO₂ экв.';
+            document.getElementById('foodCO2').textContent = yearlyCO2.toFixed(2) + ' кг CO₂ экв.';
+            document.getElementById('foodSuggestion').textContent = suggestion;
+            
+            document.getElementById('foodResults').style.display = 'block';
+            
+            updateEcoLevel(10);
+        }
+        
+        // Су тұтынуын есептеу
+        function calculateWaterUsage() {
+            const showerTime = parseFloat(document.getElementById('showerTime').value);
+            const bathFrequency = parseFloat(document.getElementById('bathFrequency').value);
+            const laundryFrequency = parseFloat(document.getElementById('laundryFrequency').value);
+            const dishwashing = parseFloat(document.getElementById('dishwashing').value);
+            
+            // Душ (10 л/мин орташа)
+            const showerWater = showerTime * 10 * 30; // күнделікті * 30 күн
+            // Ванна (150 л/рет орташа)
+            const bathWater = bathFrequency * 150 * 4; // апталықтан айлыққа
+            // Кір жуу (50 л/рет орташа)
+            const laundryWater = laundryFrequency * 50 * 4; // апталықтан айлыққа
+            // Ыдыс жуу
+            const dishWater = dishwashing * 30; // күнделікті * 30 күн
+            
+            const dailyWater = (showerWater/30) + (bathWater/30/4) + (laundryWater/30/4) + dishWater;
+            const monthlyWater = showerWater + bathWater + laundryWater + (dishWater * 30);
+            
+            // Ұсыныс
+            let saving = "Душ уақытын 5 минутқа қысқартыңыз";
+            if (bathFrequency > 2) {
+                saving = "Ваннаның орнына душ қабылдаңыз";
+            } else if (laundryFrequency > 5) {
+                saving = "Кір жуғышты толық жүктегенде қолданыңыз";
+            }
+            
+            document.getElementById('dailyWater').textContent = dailyWater.toFixed(2) + ' л';
+            document.getElementById('monthlyWater').textContent = monthlyWater.toFixed(2) + ' л';
+            document.getElementById('waterSaving').textContent = saving;
+            
+            document.getElementById('waterResults').style.display = 'block';
+            
+            // Статистиканы жаңарту
+            const savedWater = Math.round(monthlyWater * 0.2); // 20% үнемдеу
+            updateStats('water', savedWater);
+            updateEcoLevel(10);
+        }
+        
+        // Статистиканы жаңарту
+        function updateStats(type, value) {
+            switch(type) {
+                case 'trees':
+                    const currentTrees = parseInt(document.getElementById('savedTrees').textContent) || 0;
+                    document.getElementById('savedTrees').textContent = currentTrees + value;
+                    break;
+                case 'money':
+                    const currentMoney = parseInt(document.getElementById('savedMoney').textContent) || 0;
+                    document.getElementById('savedMoney').textContent = (currentMoney + value) + ' ₸';
+                    break;
+                case 'water':
+                    const currentWater = parseInt(document.getElementById('savedWater').textContent) || 0;
+                    document.getElementById('savedWater').textContent = (currentWater + value) + ' л';
+                    break;
+                case 'energy':
+                    const currentEnergy = parseInt(document.getElementById('savedEnergy').textContent) || 0;
+                    document.getElementById('savedEnergy').textContent = (currentEnergy + value) + ' кВт·сағ';
+                    break;
+            }
+        }
+        
+        // Эко-дәрежені жаңарту
+        function updateEcoLevel(points) {
+            const ecoLevel = document.getElementById('ecoLevel');
+            const ecoPercentage = document.getElementById('ecoPercentage');
+            
+            let currentLevel = parseInt(ecoLevel.style.width) || 30;
+            let newLevel = Math.min(currentLevel + points, 100);
+            
+            ecoLevel.style.width = newLevel + '%';
+            ecoPercentage.textContent = newLevel + '%';
+            
+            // Энергия үнемдеуді есептеу
+            if (points > 0) {
+                const savedEnergy = Math.round(points * 10); // 1 ұпай = 10 кВт·сағ
+                updateStats('energy', savedEnergy);
+            }
+        }
+        
+        // Бастапқы есептеулерді орындау
+        document.addEventListener('DOMContentLoaded', function() {
+            // Кездейсоқ бастапқы мәндер
+            document.getElementById('savedTrees').textContent = Math.floor(Math.random() * 10);
+            document.getElementById('savedMoney').textContent = Math.floor(Math.random() * 5000) + ' ₸';
+            document.getElementById('savedWater').textContent = Math.floor(Math.random() * 1000) + ' л';
+            document.getElementById('savedEnergy').textContent = Math.floor(Math.random() * 200) + ' кВт·сағ';
+            
+            // Карточкаларға эффект қосу
+            const cards = document.querySelectorAll('.calculator-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

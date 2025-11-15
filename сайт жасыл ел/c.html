@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жасыл Ел - Эко-көлік</title>
+    <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+</head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #90EE90;
+            --dark-green: #1A5D38;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+            --yellow: #FFD700;
+            --blue: #1E90FF;
+            --orange: #FFA500;
+            --red: #FF4500;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header стильдері */
+        header {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-green);
+        }
+
+        /* Негізгі контент */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--light-green), var(--primary-green));
+            border-radius: 20px;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Көлік секциялары */
+        .transport-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            color: var(--dark-green);
+            border-bottom: 3px solid var(--light-green);
+            padding-bottom: 1rem;
+        }
+
+        .section-header i {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+        }
+
+        /* Көлік карточкалары */
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .transport-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray) 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-green);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .transport-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-green), var(--light-green));
+        }
+
+        .transport-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .transport-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+
+        .transport-card h3 i {
+            margin-right: 12px;
+            font-size: 1.6rem;
+        }
+
+        /* Экологиялық рейтинг */
+        .eco-rating {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .rating-excellent { background: var(--primary-green); color: white; }
+        .rating-good { background: var(--light-green); color: #333; }
+        .rating-moderate { background: var(--yellow); color: #333; }
+
+        /* Ерекшеліктер тізімі */
+        .features-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list li:before {
+            content: '✓';
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Салыстыру кестесі */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table th {
+            background: var(--primary-green);
+            color: white;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        /* Зарядтау станциялары картасы */
+        .charging-map {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: 400px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark-green);
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Стимулдар карточкалары */
+        .incentives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .incentive-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--blue);
+        }
+
+        .incentive-card i {
+            font-size: 3rem;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Модальды терезе */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-green);
+        }
+
+        .modal-header h2 {
+            color: var(--dark-green);
+            font-size: 2rem;
+        }
+
+        .vehicle-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .vehicle-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            color: var(--primary-green);
+        }
+
+        .vehicle-specs h3,
+        .vehicle-features h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .spec-item {
+            padding: 0.8rem;
+            background: var(--gray);
+            border-radius: 8px;
+        }
+
+        .spec-label {
+            font-weight: bold;
+            color: var(--dark-green);
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .benefits-list li:before {
+            content: '✓';
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-green);
+        }
+
+        .btn-secondary {
+            background: var(--blue);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #1a7ae0;
+        }
+
+        /* Футер */
+        footer {
+            background: linear-gradient(135deg, var(--dark-green), #144329);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links i {
+            font-size: 1.5rem;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .social-links i:hover {
+            color: var(--light-green);
+        }
+
+        /* Адаптивтік */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .transport-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .vehicle-details {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Жасыл Ел
+            </div>
+            <ul class="nav-links">
+                <li><a href="a.html"><i class="fas fa-home"></i> Басты бет</a></li>
+                <li><a href="b.html"><i class="fas fa-recycle"></i> Эко-өмір</a></li>
+                <li><a href="c.html" style="color: var(--light-green);"><i class="fas fa-car"></i> Эко-көлік</a></li>
+                <li><a href="d.html"><i class="fas fa-calculator"></i> Есептегіштер</a></li>
+                <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Карта</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Негізгі контент -->
+    <div class="main-container">
+        <!-- Бет тақырыбы -->
+        <section class="page-header">
+            <h1><i class="fas fa-car-side"></i> Эко-көлік</h1>
+            <p>Табиғатқа аса зияныз көліктерді таңдаңыз</p>
+        </section>
+
+        <!-- Электромобильдер -->
+        <section class="transport-section">
+            <div class="section-header">
+                <i class="fas fa-bolt"></i>
+                <h2>Электромобильдер</h2>
+            </div>
+            
+            <div class="transport-grid">
+                <div class="transport-card">
+                    <h3>
+                        <i class="fas fa-car"></i>
+                        Tesla Model 3
+                        <span class="eco-rating rating-excellent">Өте жақсы</span>
+                    </h3>
+                    <p><strong>Шығарындысы:</strong> 0 г CO₂/км</p>
+                    <p><strong>Қуаты:</strong> 250-350 км</p>
+                    <p><strong>Зарядтау уақыты:</strong> 30-60 мин</p>
+                    
+                    <ul class="features-list">
+                        <li>Толық электрлі жетек</li>
+                        <li>Автопилот мүмкіндігі</li>
+                        <li>Жоғары қуаттылық</li>
+                        <li>Эко-материалдар</li>
+                    </ul>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <button class="details-btn" data-vehicle="tesla" style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-info-circle"></i> Толығырақ
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="transport-card">
+                    <h3>
+                        <i class="fas fa-car"></i>
+                        Nissan Leaf
+                        <span class="eco-rating rating-excellent">Өте жақсы</span>
+                    </h3>
+                    <p><strong>Шығарындысы:</strong> 0 г CO₂/км</p>
+                    <p><strong>Қуаты:</strong> 200-300 км</p>
+                    <p><strong>Зарядтау уақыты:</strong> 40-60 мин</p>
+                    
+                    <ul class="features-list">
+                        <li>Қолжетімді баға</li>
+                        <li>Сенімділік</li>
+                        <li>Тихий жұмыс</li>
+                        <li>Төменгі баксауыт</li>
+                    </ul>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <button class="details-btn" data-vehicle="nissan" style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-info-circle"></i> Толығырақ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Гибридті көліктер -->
+        <section class="transport-section">
+            <div class="section-header">
+                <i class="fas fa-gas-pump"></i>
+                <h2>Гибридті көліктер</h2>
+            </div>
+            
+            <div class="transport-grid">
+                <div class="transport-card">
+                    <h3>
+                        <i class="fas fa-car"></i>
+                        Toyota Prius
+                        <span class="eco-rating rating-good">Жақсы</span>
+                    </h3>
+                    <p><strong>Шығарындысы:</strong> 70 г CO₂/км</p>
+                    <p><strong>Отын шығыны:</strong> 3.5 л/100км</p>
+                    <p><strong>Типі:</strong> Параллельді гибрид</p>
+                    
+                    <ul class="features-list">
+                        <li>Электр және бензин</li>
+                        <li>Төменгі отын шығыны</li>
+                        <li>Қайта зарядтау мүмкіндігі</li>
+                        <li>Ұзақ қызмет ету мерзімі</li>
+                    </ul>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <button class="details-btn" data-vehicle="toyota" style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-info-circle"></i> Толығырақ
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="transport-card">
+                    <h3>
+                        <i class="fas fa-car"></i>
+                        Hyundai Ioniq Hybrid
+                        <span class="eco-rating rating-good">Жақсы</span>
+                    </h3>
+                    <p><strong>Шығарындысы:</strong> 79 г CO₂/км</p>
+                    <p><strong>Отын шығыны:</strong> 3.9 л/100км</p>
+                    <p><strong>Типі:</strong> Параллельді гибрид</p>
+                    
+                    <ul class="features-list">
+                        <li>Заманауи дизайн</li>
+                        <li>Жетілдірілген технология</li>
+                        <li>Ыңғайлылық</li>
+                        <li>Эко-жинақ</li>
+                    </ul>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <button class="details-btn" data-vehicle="hyundai" style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-info-circle"></i> Толығырақ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Жаяу жүру және велосипед -->
+        <section class="transport-section">
+            <div class="section-header">
+                <i class="fas fa-walking"></i>
+                <h2>Жаяу жүру және велосипед</h2>
+            </div>
+            
+            <div class="transport-grid">
+                <div class="transport-card">
+                    <h3>
+                        <i class="fas fa-bicycle"></i>
+                        Велосипед
+                        <span class="eco-rating rating-excellent">Тамаша</span>
+                    </h3>
+                    <p><strong>Шығарындысы:</strong> 0 г CO₂</p>
+                    <p><strong>Денсаулық:</strong> Өте пайдалы</p>
+                    <p><strong>Құны:</strong> Төмен</p>
+                    
+                    <ul class="features-list">
+                        <li>Денсаулыққа пайдалы</li>
+                        <li>Ешқандай шығарынды жоқ</li>
+                        <li>Кепілдік шығыны жоқ</li>
+                        <li>Тұрақ мәселесі жоқ</li>
+                    </ul>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <button class="details-btn" data-vehicle="bicycle" style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-info-circle"></i> Толығырақ
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="transport-card">
+                    <h3>
+                        <i class="fas fa-walking"></i>
+                        Жаяу жүру
+                        <span class="eco-rating rating-excellent">Тамаша</span>
+                    </h3>
+                    <p><strong>Шығарындысы:</strong> 0 г CO₂</p>
+                    <p><strong>Денсаулық:</strong> Өте пайдалы</p>
+                    <p><strong>Құны:</strong> Тегін</p>
+                    
+                    <ul class="features-list">
+                        <li>Ең экологиялық таза</li>
+                        <li>Денсаулыққа өте пайдалы</li>
+                        <li>Стресті азайтады</li>
+                        <li>Қаржылық үнемдеу</li>
+                    </ul>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <button class="details-btn" data-vehicle="walking" style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-info-circle"></i> Толығырақ
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="transport-card">
+                    <h3>
+                        <i class="fas fa-subway"></i>
+                        Қоғамдық көлік
+                        <span class="eco-rating rating-good">Жақсы</span>
+                    </h3>
+                    <p><strong>Шығарындысы:</strong> 20-50 г CO₂/км</p>
+                    <p><strong>Тиімділік:</strong> Жоғары</p>
+                    <p><strong>Құны:</strong> Төмен</p>
+                    
+                    <ul class="features-list">
+                        <li>Көптеген адамдарға</li>
+                        <li>Трафикті азайтады</li>
+                        <li>Энергия тиімді</li>
+                        <li>Қолжетімді баға</li>
+                    </ul>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <button class="details-btn" data-vehicle="public" style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-info-circle"></i> Толығырақ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Көліктерді салыстыру -->
+        <section class="transport-section">
+            <div class="section-header">
+                <i class="fas fa-chart-bar"></i>
+                <h2>Көліктерді салыстыру</h2>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Көлік түрі</th>
+                        <th>CO₂ шығарындысы (г/км)</th>
+                        <th>Отын шығыны</th>
+                        <th>Эко-рейтинг</th>
+                        <th>Құны</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-bicycle"></i> Велосипед</td>
+                        <td>0</td>
+                        <td>Жоқ</td>
+                        <td><span class="eco-rating rating-excellent">Тамаша</span></td>
+                        <td>Төмен</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-walking"></i> Жаяу жүру</td>
+                        <td>0</td>
+                        <td>Жоқ</td>
+                        <td><span class="eco-rating rating-excellent">Тамаша</span></td>
+                        <td>Тегін</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-bolt"></i> Электромобиль</td>
+                        <td>0*</td>
+                        <td>20 кВт/100км</td>
+                        <td><span class="eco-rating rating-excellent">Өте жақсы</span></td>
+                        <td>Жоғары</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-gas-pump"></i> Гибридті</td>
+                        <td>70-90</td>
+                        <td>3-4 л/100км</td>
+                        <td><span class="eco-rating rating-good">Жақсы</span></td>
+                        <td>Орташа</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-bus"></i> Автобус</td>
+                        <td>80-120</td>
+                        <td>25-35 л/100км</td>
+                        <td><span class="eco-rating rating-good">Жақсы</span></td>
+                        <td>Төмен</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-car"></i> Бензинді автомобиль</td>
+                        <td>150-200</td>
+                        <td>6-10 л/100км</td>
+                        <td><span class="eco-rating rating-moderate">Орташа</span></td>
+                        <td>Орташа</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                * Электр энергиясы өндіру кезіндегі шығарынды есепке алынбаған
+            </p>
+        </section>
+
+        <!-- Зарядтау станциялары -->
+        <section class="transport-section">
+            <div class="section-header">
+                <i class="fas fa-charging-station"></i>
+                <h2>Зарядтау станциялары</h2>
+            </div>
+            
+            <div class="charging-map">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Қазақстандағы электромобильдер зарядтау станциялары</h3>
+                    <p>Астана, Алматы, Шымкент қалаларында 50+ станция</p>
+                    <button style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 1rem;">
+                        <i class="fas fa-map"></i> Картаны көру
+                    </button>
+                </div>
+            </div>
+            
+            <div class="incentives-grid">
+                <div class="incentive-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h4>Субсидиялар</h4>
+                    <p>Электромобиль сатып алуға мемлекеттік қолдау</p>
+                </div>
+                
+                <div class="incentive-card">
+                    <i class="fas fa-taxi"></i>
+                    <h4>Тегін тұрақ</h4>
+                    <p>Кейбір қалаларда тегін тұрақ орындары</p>
+                </div>
+                
+                <div class="incentive-card">
+                    <i class="fas fa-road"></i>
+                    <h4>Жол салығы жоқ</h4>
+                    <p>Электромобильдер үшін жол салығынан босату</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кеңестер -->
+        <section class="transport-section">
+            <div class="section-header">
+                <i class="fas fa-lightbulb"></i>
+                <h2>Эко-көлік бойынша кеңестер</h2>
+            </div>
+            
+            <div class="transport-grid">
+                <div class="transport-card">
+                    <h3><i class="fas fa-route"></i> Маршрутты жоспарлау</h3>
+                    <p>Қысқа жолдарды таңдап, отынды үнемдеңіз</p>
+                    <ul class="features-list">
+                        <li>Бірнеше тоқталарды біріктіру</li>
+                        <li>Трафикке қарамастан жүру</li>
+                        <li>Навигацияны пайдалану</li>
+                    </ul>
+                </div>
+                
+                <div class="transport-card">
+                    <h3><i class="fas fa-car-crash"></i> Экологиялық жүру</h3>
+                    <p>Отын шығынын азайтатын әдістер</p>
+                    <ul class="features-list">
+                        <li>Бірқалыпты жылдамдық</li>
+                        <li>Кенет тежеуден аулақ болу</li>
+                        <li>Кондиционерді үнемді пайдалану</li>
+                    </ul>
+                </div>
+                
+                <div class="transport-card">
+                    <h3><i class="fas fa-tools"></i> Көлікті ұстау</h3>
+                    <p>Дұрыс техникалық қызмет көрсету</p>
+                    <ul class="features-list">
+                        <li>Шиналардың ауасын тексеру</li>
+                        <li>Уақытында жөндеу</li>
+                        <li>Сәйкес майларды пайдалану</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Модальды терезе -->
+    <div id="vehicleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTitle">Көлік ақпараты</h2>
+            </div>
+            <div class="vehicle-details">
+                <div class="vehicle-image">
+                    <i id="vehicleIcon" class="fas fa-car"></i>
+                </div>
+                <div class="vehicle-specs">
+                    <h3>Техникалық сипаттамалар</h3>
+                    <div class="specs-grid" id="specsGrid">
+                        <!-- Спецификациялар осында толтырылады -->
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-features">
+                <h3>Артықшылықтар</h3>
+                <ul class="benefits-list" id="benefitsList">
+                    <!-- Артықшылықтар осында толтырылады -->
+                </ul>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary">
+                    <i class="fas fa-car"></i> Дилерлерді көру
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-calculator"></i> Шығынды есептеу
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>"Жасыл Ел" - Қазақстандық экологиялық қозғалыс</p>
+            <p>© 2025 </p>
+            <div class="social-links">
+                <i class="fas fa-envelope"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-telegram"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Көлік деректері
+        const vehicleData = {
+            tesla: {
+                title: "Tesla Model 3",
+                icon: "fas fa-bolt",
+                specs: [
+                    { label: "Қуаты", value: "250-350 км" },
+                    { label: "Зарядтау уақыты", value: "30-60 мин" },
+                    { label: "Қуаты", value: "283 ж/к" },
+                    { label: "Үдету (0-100 км/сағ)", value: "5.6 сек" },
+                    { label: "Бағасы", value: "25,000,000 ₸" },
+                    { label: "Эко-рейтинг", value: "Өте жақсы" }
+                ],
+                benefits: [
+                    "Толық электрлі жетек - нөлдік шығарынды",
+                    "Автопилот жүйесі - қауіпсіз және тиімді жүру",
+                    "Жоғары қуаттылық - ұзақ қашықтыққа жеткізіледі",
+                    "Эко-материалдар - қайта өңделген материалдар",
+                    "Тегін Over-the-Air жаңартулар",
+                    "Суперчаржер желісіне қол жетімділік"
+                ]
+            },
+            nissan: {
+                title: "Nissan Leaf",
+                icon: "fas fa-car",
+                specs: [
+                    { label: "Қуаты", value: "200-300 км" },
+                    { label: "Зарядтау уақыты", value: "40-60 мин" },
+                    { label: "Қуаты", value: "150 ж/к" },
+                    { label: "Үдету (0-100 км/сағ)", value: "7.9 сек" },
+                    { label: "Бағасы", value: "18,000,000 ₸" },
+                    { label: "Эко-рейтинг", value: "Өте жақсы" }
+                ],
+                benefits: [
+                    "Қолжетімді баға - электромобильдер арасында ең арзан",
+                    "Сенімділік - 10 жылға дейін батарея кепілдігі",
+                    "Тихий жұмыс - дыбыссыыз жүру",
+                    "Төменгі баксауыт - жоғары қауіпсіздік",
+                    "e-Pedal технологиясы - бір педальмен басқару",
+                    "ProPILOT көмекші жүйесі"
+                ]
+            },
+            toyota: {
+                title: "Toyota Prius",
+                icon: "fas fa-gas-pump",
+                specs: [
+                    { label: "Шығарындысы", value: "70 г CO₂/км" },
+                    { label: "Отын шығыны", value: "3.5 л/100км" },
+                    { label: "Қуаты", value: "122 ж/к" },
+                    { label: "Үдету (0-100 км/сағ)", value: "10.6 сек" },
+                    { label: "Бағасы", value: "12,000,000 ₸" },
+                    { label: "Эко-рейтинг", value: "Жақсы" }
+                ],
+                benefits: [
+                    "Электр және бензин - екі жетек түрі",
+                    "Төменгі отын шығыны - үнемділік",
+                    "Қайта зарядтау мүмкіндігі - қозғалыс кезінде зарядтау",
+                    "Ұзақ қызмет ету мерзімі - сенімділік",
+                    "Жоғары қайта сату құны",
+                    "Кең ішкі кеңістік"
+                ]
+            },
+            hyundai: {
+                title: "Hyundai Ioniq Hybrid",
+                icon: "fas fa-car",
+                specs: [
+                    { label: "Шығарындысы", value: "79 г CO₂/км" },
+                    { label: "Отын шығыны", value: "3.9 л/100км" },
+                    { label: "Қуаты", value: "141 ж/к" },
+                    { label: "Үдету (0-100 км/сағ)", value: "10.2 сек" },
+                    { label: "Бағасы", value: "11,500,000 ₸" },
+                    { label: "Эко-рейтинг", value: "Жақсы" }
+                ],
+                benefits: [
+                    "Заманауи дизайн - стильді сыртқы түр",
+                    "Жетілдірілген технология - интеллектуалды жүйелер",
+                    "Ыңғайлылық - жоғары комфорт",
+                    "Эко-жинақ - экологиялық таза материалдар",
+                    "Ақылды қайта зарядтау жүйесі",
+                    "Кең жүк салынатын бөлім"
+                ]
+            },
+            bicycle: {
+                title: "Велосипед",
+                icon: "fas fa-bicycle",
+                specs: [
+                    { label: "Шығарындысы", value: "0 г CO₂" },
+                    { label: "Қуаты", value: "Адам күші" },
+                    { label: "Жылдамдық", value: "15-25 км/сағ" },
+                    { label: "Құны", value: "50,000-500,000 ₸" },
+                    { label: "Қызмет ету мерзімі", value: "10+ жыл" },
+                    { label: "Эко-рейтинг", value: "Тамаша" }
+                ],
+                benefits: [
+                    "Денсаулыққа пайдалы - кардио жаттығу",
+                    "Ешқандай шығарынды жоқ - таза орта",
+                    "Кепілдік шығыны жоқ - арзан пайдалану",
+                    "Тұрақ мәселесі жоқ - кез келген жерге тұрақтау",
+                    "Денсаулыққа пайдалы - дене салмағын басқару",
+                    "Уақыт үнемдеу - трафикте тұрмау"
+                ]
+            },
+            walking: {
+                title: "Жаяу жүру",
+                icon: "fas fa-walking",
+                specs: [
+                    { label: "Шығарындысы", value: "0 г CO₂" },
+                    { label: "Жылдамдық", value: "4-6 км/сағ" },
+                    { label: "Құны", value: "Тегін" },
+                    { label: "Денсаулық пайдасы", value: "Өте жоғары" },
+                    { label: "Қашықтық", value: "5 км дейін" },
+                    { label: "Эко-рейтинг", value: "Тамаша" }
+                ],
+                benefits: [
+                    "Ең экологиялық таза - абсолютті нөлдік шығарынды",
+                    "Денсаулыққа өте пайдалы - жүрек-қан тамырлары жүйесі",
+                    "Стресті азайтады - психологиялық пайда",
+                    "Қаржылық үнемдеу - ешқандай шығын жоқ",
+                    "Экологиялық таза - табиғатқа еш зиян жоқ",
+                    "Қоғамдастықпен байланыс - айналамен әрекеттесу"
+                ]
+            },
+            public: {
+                title: "Қоғамдық көлік",
+                icon: "fas fa-bus",
+                specs: [
+                    { label: "Шығарындысы", value: "20-50 г CO₂/км" },
+                    { label: "Тиімділік", value: "Жоғары" },
+                    { label: "Құны", value: "90-300 ₸" },
+                    { label: "Жылдамдық", value: "Айнымалы" },
+                    { label: "Сыйымдылығы", value: "50-100 адам" },
+                    { label: "Эко-рейтинг", value: "Жақсы" }
+                ],
+                benefits: [
+                    "Көптеген адамдарға - жоғары тиімділік",
+                    "Трафикті азайтады - жолдарды босатады",
+                    "Энергия тиімді - адам басына шаққандағы төмен шығын",
+                    "Қолжетімді баға - барлығына қол жетімді",
+                    "Қалалық инфрақұрылымды қолдау",
+                    "Экологиялық таза - жеке көлікке қарағанда жақсы"
+                ]
+            }
+        };
+
+        // Модальды терезені басқару
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('vehicleModal');
+            const closeBtn = document.querySelector('.close');
+            const detailsBtns = document.querySelectorAll('.details-btn');
+            const modalTitle = document.getElementById('modalTitle');
+            const vehicleIcon = document.getElementById('vehicleIcon');
+            const specsGrid = document.getElementById('specsGrid');
+            const benefitsList = document.getElementById('benefitsList');
+
+            // Толығырақ түймелеріне оқиға қосу
+            detailsBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const vehicleType = this.getAttribute('data-vehicle');
+                    showVehicleDetails(vehicleType);
+                });
+            });
+
+            // Модальды терезені жабу
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Сыртқы басу арқылы жабу
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Көлік мәліметтерін көрсету функциясы
+            function showVehicleDetails(vehicleType) {
+                const vehicle = vehicleData[vehicleType];
+                
+                if (vehicle) {
+                    modalTitle.textContent = vehicle.title;
+                    vehicleIcon.className = vehicle.icon;
+                    
+                    // Спецификацияларды толтыру
+                    specsGrid.innerHTML = '';
+                    vehicle.specs.forEach(spec => {
+                        const specItem = document.createElement('div');
+                        specItem.className = 'spec-item';
+                        specItem.innerHTML = `
+                            <div class="spec-label">${spec.label}</div>
+                            <div>${spec.value}</div>
+                        `;
+                        specsGrid.appendChild(specItem);
+                    });
+                    
+                    // Артықшылықтарды толтыру
+                    benefitsList.innerHTML = '';
+                    vehicle.benefits.forEach(benefit => {
+                        const li = document.createElement('li');
+                        li.textContent = benefit;
+                        benefitsList.appendChild(li);
+                    });
+                    
+                    // Модальды терезені көрсету
+                    modal.style.display = 'block';
+                }
+            }
+
+            // Карточкаларға эффект қосу
+            const cards = document.querySelectorAll('.transport-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Кестеге эффект қосу
+            const tableRows = document.querySelectorAll('.comparison-table tbody tr');
+            tableRows.forEach(row => {
+                row.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#f0f8f0';
+                });
+                
+                row.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '';
+                });
+            });
+
+            // Зарядтау станциялары картасы
+            const mapButton = document.querySelector('.charging-map button');
+            mapButton.addEventListener('click', function() {
+                alert('Карта жақын арада қосылады. Қазір Астанада 15, Алматыда 25, Шымкентте 10 зарядтау станциясы бар.');
+            });
+        });
+
+        // Көлік кеңестері
+        function showTransportTip() {
+            const tips = [
+                "Жұмысқа велосипедпен бару денсаулыққа пайдалы және экологиялық таза",
+                "Электромобильдер үшін түнгі уақытта зарядтау арзанырақ",
+                "Қоғамдық көлікпен жүру жеке көлікке қарағанда 10 есе экологиялық таза",
+                "Жаяу жүру сіздің денсаулығыңызға және қоршаған ортаға пайдалы"
+            ];
+            
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            alert('Кеңес: ' + randomTip);
+        }
+
+        // Автоматты түрде кеңес көрсету
+        setTimeout(showTransportTip, 5000);
+    </script>
+</body>
+</html>

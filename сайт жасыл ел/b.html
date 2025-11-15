@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жасыл Ел - Эко-өмір салты</title>
+    <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+</head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #90EE90;
+            --dark-green: #1A5D38;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+            --yellow: #FFD700;
+            --blue: #1E90FF;
+        }
+
+        body {
+            background-color: var(--gray);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header стильдері */
+        header {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-green);
+        }
+
+        /* Негізгі контент */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--light-green), var(--primary-green));
+            border-radius: 15px;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Секциялар */
+        .section {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: var(--dark-green);
+            border-bottom: 2px solid var(--light-green);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-header i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        /* Карточкалар */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .eco-card {
+            background: var(--gray);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .eco-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .eco-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .eco-card h3 i {
+            margin-right: 10px;
+        }
+
+        /* Прогресс бар */
+        .progress-container {
+            margin: 1.5rem 0;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-green);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Қалдық сұрыптау */
+        .waste-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .waste-item {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .waste-item:hover {
+            transform: scale(1.05);
+        }
+
+        .waste-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .plastic { background: #E1F5FE; color: #01579B; }
+        .paper { background: #F1F8E9; color: #33691E; }
+        .glass { background: #FFF8E1; color: #FF6F00; }
+        .organic { background: #E8F5E9; color: #1B5E20; }
+
+        /* Чекбокстар */
+        .eco-tasks {
+            margin-top: 1.5rem;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: var(--gray);
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .task-item:hover {
+            background: #e8f5e9;
+        }
+
+        .task-item input {
+            margin-right: 10px;
+        }
+
+        /* Футер */
+        footer {
+            background: var(--dark-green);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Модальды терезе */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--dark-green);
+        }
+
+        /* Адаптивтік */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Жасыл Ел
+            </div>
+            <ul class="nav-links">
+                <li><a href="a.html"><i class="fas fa-home"></i> Басты бет</a></li>
+                <li><a href="b.html" style="color: var(--light-green);"><i class="fas fa-recycle"></i> Эко-өмір</a></li>
+                <li><a href="c.html"><i class="fas fa-car"></i> Эко-көлік</a></li>
+                <li><a href="d.html"><i class="fas fa-calculator"></i> Есептегіштер</a></li>
+                <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Карта</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Негізгі контент -->
+    <div class="main-container">
+        <!-- Бет тақырыбы -->
+        <section class="page-header">
+            <h1><i class="fas fa-seedling"></i> Эко-өмір салты</h1>
+            <p>Күнделікті өміріңізді жасыл етіп өзгертіңіз</p>
+        </section>
+
+        <!-- Күнделікті эко-дәстүрлер -->
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-calendar-day"></i>
+                <h2>Күнделікті эко-дәстүрлер</h2>
+            </div>
+            <p>Күн сайынғы қарапайым әрекеттермен табиғатты қорғауға көмектесіңіз:</p>
+            
+            <div class="cards-grid">
+                <div class="eco-card">
+                    <h3><i class="fas fa-tint"></i> Су үнемдеу</h3>
+                    <p>Дүкенге барғанда өз сөмізіңізді алып жүріңіз</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span>Бастауыш</span>
+                            <span>75%</span>
+                            <span>Шебер</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="eco-card">
+                    <h3><i class="fas fa-bolt"></i> Энергия үнемдеу</h3>
+                    <p>Қажет болмағанда электр құрылғыларын өшіріңіз</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span>Бастауыш</span>
+                            <span>60%</span>
+                            <span>Шебер</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="eco-card">
+                    <h3><i class="fas fa-shopping-bag"></i> Сөмкесіз сауда</h3>
+                    <p>Дүкенге барғанда өз сөмізіңізді алып жүріңіз</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span>Бастауыш</span>
+                            <span>85%</span>
+                            <span>Шебер</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Үй жағдайындағы эко-баптама -->
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-home"></i>
+                <h2>Үй жағдайындағы эко-баптама</h2>
+            </div>
+            <p>Үйіңізді экологиялық таза алаңға айналдырудың жолдары:</p>
+            
+            <div class="eco-tasks">
+                <div class="task-item">
+                    <input type="checkbox" id="task1">
+                    <label for="task1">Энергия үнемді шамдарды орнату</label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task2">
+                    <label for="task2">Су фильтрін пайдалану</label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task3">
+                    <label for="task3">Үй жазылқыларын отырғызу</label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task4">
+                    <label for="task4">Компосттау жүйесін құру</label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task5">
+                    <label for="task5">Табиғи тазалу құралдарын пайдалану</label>
+                </div>
+            </div>
+            
+            <div class="cards-grid" style="margin-top: 2rem;">
+                <div class="eco-card">
+                    <h3><i class="fas fa-thermometer-half"></i> Энергия тиімділігі</h3>
+                    <p>Термостатты бір градус төмендету - жылыту шығынын 5% үнемдейді</p>
+                </div>
+                
+                <div class="eco-card">
+                    <h3><i class="fas fa-wind"></i> Табиғи желдету</h3>
+                    <p>Кондиционердің орнына терезелерді ашып, табиғи желдетуді пайдаланыңыз</p>
+                </div>
+                
+                <div class="eco-card">
+                    <h3><i class="fas fa-solar-panel"></i> Күн энергиясы</h3>
+                    <p>Шағын күн панельдерін орнатып, электр энергиясын өндіріңіз</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Қалдықтарды сұрыптау нұсқаулығы -->
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-trash-alt"></i>
+                <h2>Қалдықтарды сұрыптау нұсқаулығы</h2>
+            </div>
+            <p>Қалдықтарды дұрыс сұрыптау - табиғатты қорғаудың маңызды қадамы:</p>
+            
+            <div class="waste-types">
+                <div class="waste-item plastic">
+                    <i class="fas fa-wine-bottle"></i>
+                    <h3>Пластик</h3>
+                    <p>Бөтелкелер, ыдыстар</p>
+                </div>
+                
+                <div class="waste-item paper">
+                    <i class="fas fa-newspaper"></i>
+                    <h3>Қағаз</h3>
+                    <p>Газет, журнал, картон</p>
+                </div>
+                
+                <div class="waste-item glass">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <h3>Шыны</h3>
+                    <p>Бөтелкелер, банкалар</p>
+                </div>
+                
+                <div class="waste-item organic">
+                    <i class="fas fa-apple-alt"></i>
+                    <h3>Органика</h3>
+                    <p>Азық-түлік қалдықтары</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--primary-green); margin-bottom: 1rem;">Сұрыптау бойынша кеңестер:</h3>
+                <ul style="padding-left: 1.5rem;">
+                    <li>Пластик бөтелкелерді жуып, құрғатпастан түгетіңіз</li>
+                    <li>Қағазды майлы болмаған жағдайда ғана сұрыптаңіз</li>
+                    <li>Шыны ыдыстарды бүгілген жағдайда бөлек тастаңыз</li>
+                    <li>Органикалық қалдықтарды компосттауға болады</li>
+                </ul>
+            </div>
+            
+            <div class="eco-card" style="margin-top: 1.5rem; background: #E3F2FD; border-left-color: var(--blue);">
+                <h3><i class="fas fa-lightbulb"></i> Кеңес</h3>
+                <p>Үйіңізде әр түрлі қалдықтар үшін бөлек ыдыстар ұстаңыз. Оларды түстері бойынша белгілеңіз: жасыл - шыны, көк - пластик, сары - қағаз, қоңыр - органика.</p>
+            </div>
+        </section>
+        
+        <!-- Эко-челлендж -->
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-trophy"></i>
+                <h2>Апталық эко-челлендж</h2>
+            </div>
+            <p>Бұл аптаға арналған экологиялық тапсырмалар:</p>
+            
+            <div class="eco-tasks">
+                <div class="task-item">
+                    <input type="checkbox" id="challenge1">
+                    <label for="challenge1">Бір күн бойы пластик сөмке пайдаланбау</label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="challenge2">
+                    <label for="challenge2">Кем дегенде 1 литр су үнемдеу</label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="challenge3">
+                    <label for="challenge3">Жаяу жүру немесе велосипедпен жүру</label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="challenge4">
+                    <label for="challenge4">Барлық қалдықтарды дұрыс сұрыптау</label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="challenge5">
+                    <label for="challenge5">Бір реттік пластиктен бас тарту</label>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <button id="joinCampaignBtn" style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                    <i class="fas fa-share-alt"></i> Науқанға қосылу
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Модальды терезе -->
+    <div id="campaignModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 style="color: var(--primary-green); margin-bottom: 1.5rem; text-align: center;">Эко-науқанға қосылу</h2>
+            <form id="campaignForm">
+                <div class="form-group">
+                    <label for="name">Аты-жөніңіз</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Электрондық пошта</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">Қала</label>
+                    <select id="city" required>
+                        <option value="">Қаланы таңдаңыз</option>
+                        <option value="astana">Астана</option>
+                        <option value="almaty">Алматы</option>
+                        <option value="shymkent">Шымкент</option>
+                        <option value="karaganda">Қарағанды</option>
+                        <option value="other">Басқа</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="commitment">Мен мынаны уәде етемін:</label>
+                    <select id="commitment" required>
+                        <option value="">Таңдаңыз</option>
+                        <option value="no_plastic">Пластик сөмкелерді пайдаланбау</option>
+                        <option value="save_water">Күнделікті суды үнемдеу</option>
+                        <option value="walking">Жаяу жүру немесе велосипедпен жүру</option>
+                        <option value="recycling">Қалдықтарды сұрыптау</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Науқанға қосылу</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>"Жасыл Ел" - Қазақстандық экологиялық қозғалыс</p>
+        <p>© 2025</p>
+        <div style="margin-top: 1rem;">
+            <i class="fas fa-envelope" style="margin: 0 10px;"></i>
+            <i class="fab fa-facebook" style="margin: 0 10px;"></i>
+            <i class="fab fa-instagram" style="margin: 0 10px;"></i>
+            <i class="fab fa-telegram" style="margin: 0 10px;"></i>
+        </div>
+    </footer>
+
+    <script>
+        // Чекбокстарды басқару
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            checkboxes.forEach(checkbox => {
+                // Күйін тексеру (мысал ретінде)
+                if (Math.random() > 0.7) {
+                    checkbox.checked = true;
+                }
+                
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.style.background = '#e8f5e9';
+                    } else {
+                        this.parentElement.style.background = '';
+                    }
+                });
+            });
+            
+            // Прогресс барларды жаңарту
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const randomProgress = Math.floor(Math.random() * 30) + 50;
+                bar.style.width = randomProgress + '%';
+                bar.nextElementSibling.querySelector('span:nth-child(2)').textContent = randomProgress + '%';
+            });
+
+            // Науқанға қосылу модальды терезесін басқару
+            const modal = document.getElementById('campaignModal');
+            const joinBtn = document.getElementById('joinCampaignBtn');
+            const closeBtn = document.querySelector('.close');
+            const form = document.getElementById('campaignForm');
+
+            // Модальды терезені ашу
+            joinBtn.addEventListener('click', function() {
+                modal.style.display = 'block';
+            });
+
+            // Модальды терезені жабу
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Пользователь модальды терезе сыртын басқанда жабу
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Форманы жіберу
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const city = document.getElementById('city').value;
+                const commitment = document.getElementById('commitment').value;
+                
+                // Мұнда деректерді серверге жіберу керек
+                // Біз жай ғана хабарлама көрсетеміз
+                alert('Рахмет, ' + name + '! Сіз эко-науқанға сәтті қосылдыңыз. Біз сізге ' + getCommitmentText(commitment) + ' бойынша кеңестер мен жаңартуларды жібереміз.');
+                
+                // Форманы тазалау және модальды терезені жабу
+                form.reset();
+                modal.style.display = 'none';
+            });
+
+            // Уәде мәтінін алу функциясы
+            function getCommitmentText(commitmentValue) {
+                switch(commitmentValue) {
+                    case 'no_plastic':
+                        return 'пластик сөмкелерді пайдаланбау';
+                    case 'save_water':
+                        return 'су үнемдеу';
+                    case 'walking':
+                        return 'жаяу жүру немесе велосипедпен жүру';
+                    case 'recycling':
+                        return 'қалдықтарды сұрыптау';
+                    default:
+                        return 'экологиялық тәжірибе';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
